@@ -1,0 +1,15 @@
+{
+  "title": "Samsung Ex-Link TV",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configure Samsung Ex-Link TV",
+        "description": "Enter the IP and port for your device.",
+        "data": {
+          "host": "Device IP",
+          "port": "Device Port"
+        }
+      }
+    }
+  }
+}

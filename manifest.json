@@ -1,0 +1,8 @@
+{
+  "domain": "samsung_exlink",
+  "name": "Samsung Ex-Link TV",
+  "version": "0.1.0",
+  "dependencies": [],
+  "codeowners": ["@jswent"],
+  "requirements": []
+}

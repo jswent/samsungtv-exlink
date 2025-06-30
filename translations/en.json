@@ -1,0 +1,11 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configure Samsung Ex-Link TV",
+        "description": "Enter the IP and Port of your RS232-to-Ethernet bridge."
+      }
+    },
+    "error": {}
+  }
+}
