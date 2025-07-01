@@ -3,17 +3,19 @@ from homeassistant.components.media_player.const import (
     MediaPlayerEntityFeature,
     MediaPlayerState,
 )
+from homeassistant.helpers.device_registry import DeviceInfo
 from .samsungtv import SamsungExLinkTV
+from .const import DOMAIN
 
 
 async def async_setup_entry(hass, config_entry, async_add_entities):
     data = config_entry.data
     tv = SamsungExLinkTV(data["host"], data.get("port", 23))
-    async_add_entities([SamsungExLinkEntity(tv, data["name"])])
+    async_add_entities([SamsungExLinkEntity(tv, data["name"], config_entry.entry_id)])
 
 
 class SamsungExLinkEntity(MediaPlayerEntity):
-    def __init__(self, tv: SamsungExLinkTV, name: str):
+    def __init__(self, tv: SamsungExLinkTV, name: str, entry_id: str):
         self._tv = tv
         self._attr_name = name
         self._attr_supported_features = (
@@ -25,6 +27,12 @@ class SamsungExLinkEntity(MediaPlayerEntity):
         self._attr_state = MediaPlayerState.OFF
         self._attr_source_list = ["HDMI 1", "HDMI 2", "HDMI 3", "HDMI 4"]
         self._attr_source = None
+        self._attr_device_info = DeviceInfo(
+            identifiers={(DOMAIN, entry_id)},
+            name=name,
+            manufacturer="Samsung",
+            model="Ex-Link TV",
+        )
 
     def turn_on(self):
         self._tv.power_on()
