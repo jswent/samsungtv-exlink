@@ -6,6 +6,7 @@
         "title": "Configure Samsung Ex-Link TV",
         "description": "Enter the IP and port for your device.",
         "data": {
+          "name": "Device Name",
           "host": "Device IP",
           "port": "Device Port"
         }
