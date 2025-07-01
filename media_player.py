@@ -20,8 +20,11 @@ class SamsungExLinkEntity(MediaPlayerEntity):
             MediaPlayerEntityFeature.TURN_ON
             | MediaPlayerEntityFeature.TURN_OFF
             | MediaPlayerEntityFeature.VOLUME_STEP
+            | MediaPlayerEntityFeature.SELECT_SOURCE
         )
         self._attr_state = MediaPlayerState.OFF
+        self._attr_source_list = ["HDMI 1", "HDMI 2", "HDMI 3", "HDMI 4"]
+        self._attr_source = None
 
     def turn_on(self):
         self._tv.power_on()
@@ -41,3 +44,15 @@ class SamsungExLinkEntity(MediaPlayerEntity):
 
     def mute_volume(self, mute):
         self._tv.mute()
+
+    def select_source(self, source):
+        source_map = {
+            "HDMI 1": 1,
+            "HDMI 2": 2,
+            "HDMI 3": 3,
+            "HDMI 4": 4,
+        }
+        if source in source_map:
+            self._tv.select_hdmi(source_map[source])
+            self._attr_source = source
+            self.schedule_update_ha_state()
