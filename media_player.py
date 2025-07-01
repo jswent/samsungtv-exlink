@@ -8,14 +8,14 @@ from .samsungtv import SamsungExLinkTV
 
 async def async_setup_entry(hass, config_entry, async_add_entities):
     data = config_entry.data
-    tv = SamsungExLinkTV(data["host"], data.get("port", 4001))
-    async_add_entities([SamsungExLinkEntity(tv)])
+    tv = SamsungExLinkTV(data["host"], data.get("port", 23))
+    async_add_entities([SamsungExLinkEntity(tv, data["name"])])
 
 
 class SamsungExLinkEntity(MediaPlayerEntity):
-    def __init__(self, tv: SamsungExLinkTV):
+    def __init__(self, tv: SamsungExLinkTV, name: str):
         self._tv = tv
-        self._attr_name = "Samsung Ex-Link TV"
+        self._attr_name = name
         self._attr_supported_features = (
             MediaPlayerEntityFeature.TURN_ON
             | MediaPlayerEntityFeature.TURN_OFF
